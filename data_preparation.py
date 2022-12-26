@@ -22,12 +22,12 @@ def process_video(file):
     # Get name of video file
     video_name = file.split('/')[-1].split('.')[0]
 
-    
+
     actions_dict = {
-        'backhand': 0, 'backhand2h': 0, 'bslice': 0, 'bvolley' :0,
-        'forehand': 1, 'foreflat': 1, 'foreopen': 1, 'fslice': 1, 'fvolley': 1,
-        'serve': 2, 'serflat': 2, 'serkick': 2, 'serslice': 2,
-        'smash': 3
+        'backhand': 0, 'backhand2h': 0, 'bslice': 0, 'bvolley' :1,
+        'forehand': 2, 'foreflat': 2, 'foreopen': 2, 'fslice': 2, 'fvolley': 3,
+        'serve': 4, 'serflat': 4, 'serkick': 4, 'serslice': 4,
+        'smash': 5
     }
     pose_technique = 'Mediapipe'
 
@@ -62,11 +62,16 @@ def data_preprocessing(input_path):
     :return: data
     """
 
-    # Obtain all files in input path recursively inside subdirectories
-    files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(input_path) for f in filenames if os.path.splitext(f)[1] == '.avi']
+    # if input path has .avi extension, process only that file
+    if os.path.splitext(input_path)[1] == '.avi':
+        files = [input_path]
+        vals = [process_video(input_path)]
+    else:
+        # Obtain all files in input path recursively inside subdirectories
+        files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(input_path) for f in filenames if os.path.splitext(f)[1] == '.avi']
 
-    # Parallel for loop
-    vals = Parallel(n_jobs=-1)(delayed(process_video)(file) for file in tqdm(files))
+        # Parallel for loop
+        vals = Parallel(n_jobs=-1)(delayed(process_video)(file) for file in tqdm(files))
 
     sequences = []
     labels = []

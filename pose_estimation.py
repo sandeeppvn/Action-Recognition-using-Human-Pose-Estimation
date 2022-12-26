@@ -9,41 +9,12 @@ def pose_estimation(frame, technique):
     :param technique: Pose estimation technique
     :return: Pose points
     """
-    if technique == 'OpenPose':
-        return openpose(frame)
-    elif technique == 'AlphaPose':
-        return alphapose(frame)
-    elif technique == 'PoseFlow':
-        return poseflow(frame)
-    elif technique == 'Mediapipe':
+
+    if technique == 'Mediapipe':
         return mediapipe(frame)
     else:
         raise ValueError('Invalid pose estimation technique')
 
-
-def openpose(frame):
-    """
-    OpenPose pose estimation function
-    :param frame: Frame from video
-    :return: Pose points
-    """
-    return None
-
-def alphapose(frame):
-    """
-    AlphaPose pose estimation function
-    :param frame: Frame from video
-    :return: Pose points
-    """
-    return None
-
-def poseflow(frame):
-    """
-    PoseFlow pose estimation function
-    :param frame: Frame from video
-    :return: Pose points
-    """
-    return None
 
 def mediapipe(frame):
     """
@@ -58,7 +29,7 @@ def mediapipe(frame):
     # For static images:
     with mp_pose.Pose(
             static_image_mode=True,
-            model_complexity=2,
+            model_complexity=0,
             min_detection_confidence=0.5) as pose:
         result = pose.process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
@@ -81,7 +52,6 @@ def mediapipe(frame):
 def main():
     video_path = 'Data/VIDEO_RGB/smash/p4_smash_s2.avi'
     cap = cv2.VideoCapture(video_path)
-    # Read the 25th frame
     cap.set(cv2.CAP_PROP_POS_FRAMES, 45)
     ret, frame = cap.read()
     while not ret:
