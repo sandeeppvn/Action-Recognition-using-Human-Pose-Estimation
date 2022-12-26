@@ -1,0 +1,2 @@
+exp_name,Train Accuracy,Validation Accuracy,Test Accuracy,Train Loss,Validation Loss,Test Loss,F1 Score,Learning Rate,Batch Size,Hidden Size,Number of Layers,Number of Epochs,Early Stopping Patience,Optimizer,Loss Function,Model
+bilstm_features_final,0.9474695920944214,0.8497409224510193,0.8717948794364929,0.1366390585899353,0.4808123707771301,0.35026198625564575,0.8237372552614738,0.001,32,128,2,100,10,Adam,Categorical Crossentropy,Bidirectional LSTM
