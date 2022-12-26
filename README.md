@@ -1,5 +1,11 @@
-The system is designed to be used by tennis coaches and players to analyze their shots and improve their performance.
+# Tennis Shot Action Recognition Using Pose Estimation and Bi-LSTM
 
+## The system is designed to be used by tennis coaches and players to analyze their shots and improve their performance.
+
+### Action Recognition with Human Pose
+![result](results/bilstm_features_finalp3_bvolley_s3+shot_prediction.jpg)
+
+## Setup
 
 To run the code, first download the folders, or clone the repository from GitHub. 
 '''
